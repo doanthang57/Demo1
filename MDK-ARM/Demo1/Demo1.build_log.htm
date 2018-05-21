@@ -1,0 +1,88 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.13.0.0
+Copyright (C) 2014 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Thang Micosoft, Micosoft, LIC=0VR30-BF60W-VGP7J-U4S1U-SH4EM-LM895
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.13.0.0
+Toolchain Path:  F:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.13.0.0
+Dialog DLL:      DCM.DLL V1.13.1.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.14.0_KEIL
+Dialog DLL:      TCM.DLL V1.14.4.0
+ 
+<h2>Project:</h2>
+E:\Bai_Tap\ARM\Demo1\MDK-ARM\Demo1.uvprojx
+Project File Date:  04/27/2018
+
+<h2>Output:</h2>
+Build target 'Demo1'
+compiling main.c...
+../Src/main.c(102): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data1, 10 );
+../Src/main.c(115): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data2, 10 );
+../Src/main.c(128): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data3, 10 );
+../Src/main.c(141): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data4, 10 );
+../Src/main.c(154): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data5, 10 );
+../Src/main.c(167): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data6, 10 );
+../Src/main.c(176): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
+         HAL_I2C_Master_Transmit(&hi2c1, BH1750_I2CADDR , datalux, 2, 100);
+../Src/main.c(178): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
+         HAL_I2C_Master_Transmit(&hi2c1, BH1750_I2CADDR , datalux, 1, 100);
+../Src/main.c(180): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
+         HAL_I2C_Master_Receive(&hi2c1, BH1750_I2CADDR , datalux, 2, 100);
+../Src/main.c(183): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+      flevel = (float)lux/1.2; // convert to real lux
+../Src/main.c(184): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+      level = (float)lux/1.2; // convert to real lux
+../Src/main.c(193): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,1);
+../Src/main.c(198): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,0);
+../Src/main.c(206): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,1);
+../Src/main.c(211): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,0);
+../Src/main.c(219): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_13,1);
+../Src/main.c(224): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_13,0);
+../Src/main.c: 17 warnings, 0 errors
+linking...
+Program Size: Code=9256 RO-data=520 RW-data=52 ZI-data=1276  
+"Demo1\Demo1.axf" - 0 Error(s), 17 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
+                ARM::CMSIS:CORE:3.40.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 3.40.0
+
+<h2>Collection of Component include folders:</h2>
+  E:\Bai_Tap\ARM\Demo1\MDK-ARM\RTE
+  F:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
+  F:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:3.40.0
+      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+</pre>
+</body>
+</html>
