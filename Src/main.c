@@ -25,21 +25,24 @@ UART_HandleTypeDef huart3;
 //#########Flash############		
 		uint8_t data;
 		uint32_t FlashAddress= 0x080E0000;
+		char seri[4];
+		char readseri;
+		uint8_t id = 0;
 //#################################//
 
 
 //* bien du lieu UART sent*//
 	uint8_t a = 0;
-	char* data1 = "@V1BXS600x";
-	char* data2 = "@V1BYS600x";
+	char* data3 = "@L1KXx";
+	char* data4 = "@L1KYx";
 	
 	uint8_t b = 0;
-	char* data3 = "@V2BXS600x";
-	char* data4 = "@V2BYS600x";
+	char* data1 = "@L2KXx";
+	char* data2 = "@L2KYx";
 	
 	uint8_t c = 0;
-	char* data5 = "@V3BXS600x";
-	char* data6 = "@V3BYS600x";
+	char* data5 = "@L3KXx";
+	char* data6 = "@L3KYx";
 
 
 /* USER CODE END PV */
@@ -52,12 +55,13 @@ static void MX_I2C1_Init(void);
 static void MX_USART3_UART_Init(void);
 
 //#####Chuong trinh con dang code########//
-void Write_Flash(uint32_t add, uint8_t data);
 uint32_t Read_Flash( uint32_t adress);
+void Write_Flash(uint32_t add, uint8_t data);
 void ReadADCControl(void);
 void ReadGWControl(void);
 void Button (void);
 void ReadLux (void);
+void save (void);
 
 
 
@@ -77,16 +81,31 @@ int main(void)
 	__HAL_UART_ENABLE_IT(&huart3,UART_IT_TC);
 	__HAL_UART_ENABLE_IT(&huart3,UART_IT_RXNE);
 
-	
+
   while (1)
    {
-				Button();
-				ReadGWControl();
-//		 		HAL_UART_Transmit_IT(&huart3, data1, 9 );
-//				HAL_Delay(200);
-		 
-	}
+		 save();
+		 if(id == 1)
+		 {
+			 Write_Flash(0x080E0000, readseri);
+			 id = 0;
+		 }
+		 data = Read_Flash(0x080E0000);
+		 ReadLux();
+		 if(cplt == 0)
+		 {
+			//Button();
+			 HAL_Delay(100);
+		 }
+		 else{
+			 if(data == '1'){
+				 ReadGWControl();
+				 HAL_Delay(1000);
+				 cplt = 0;
+			 }
+		 }
 }
+	}
 /** System Button Configuration*/
 void Button (void)
 {		
@@ -99,7 +118,7 @@ void Button (void)
 					a = 1;
 					HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_15);
 					while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)==GPIO_PIN_SET);
-					HAL_UART_Transmit_IT(&huart3, data1, 10 );
+					HAL_UART_Transmit_IT(&huart3, data1, 6 );
 					HAL_Delay(200);
 				}
 		}
@@ -112,7 +131,7 @@ void Button (void)
 					a = 0;
 					HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_15);
 					while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)==GPIO_PIN_SET);
-					HAL_UART_Transmit_IT(&huart3, data2, 10 );
+					HAL_UART_Transmit_IT(&huart3, data2, 6 );
 					HAL_Delay(200);
 			}
 		}
@@ -125,7 +144,7 @@ void Button (void)
 					b = 1;
 					HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_14);
 					while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_5)==GPIO_PIN_SET);
-					HAL_UART_Transmit_IT(&huart3, data3, 10 );
+					HAL_UART_Transmit_IT(&huart3, data3, 6);
 					HAL_Delay(200);
 				}
 		}
@@ -138,7 +157,7 @@ void Button (void)
 					b = 0;
 					HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_14);
 					while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_5)==GPIO_PIN_SET);
-					HAL_UART_Transmit_IT(&huart3, data4, 10 );
+					HAL_UART_Transmit_IT(&huart3, data4, 6 );
 					HAL_Delay(200);
 			}
 		}
@@ -151,7 +170,7 @@ void Button (void)
 					c = 1;
 					HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_13);
 					while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_7)==GPIO_PIN_SET);
-					HAL_UART_Transmit_IT(&huart3, data5, 10 );
+					HAL_UART_Transmit_IT(&huart3, data5, 6 );
 					HAL_Delay(200);
 				}
 		}
@@ -164,7 +183,7 @@ void Button (void)
 					c = 0;
 					HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_13);
 					while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_7)==GPIO_PIN_SET);
-					HAL_UART_Transmit_IT(&huart3, data6, 10 );
+					HAL_UART_Transmit_IT(&huart3, data6, 6);
 					HAL_Delay(200);
 			}
 		}
@@ -186,43 +205,55 @@ void ReadLux (void)
 void ReadGWControl(void)
 {
 	//@V4BXS600x
-	  if( (UART_Buffer[0] == '@') &&(UART_Buffer[1] == 'V') && (UART_Buffer[2] == '1')&& (UART_Buffer[3] == 'B')&& (UART_Buffer[5] == 'S'))
+	  if( (UART_Buffer[0] == '@') &&(UART_Buffer[1] == 'L') && (UART_Buffer[2] == '1')&& (UART_Buffer[3] == 'K'))
 			{
 				if(UART_Buffer[4]== 'X')
 				{
 					HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,1);
+					b = 1;
 					HAL_Delay(200);
+					
 				}
 				if(UART_Buffer[4]== 'Y')
 				{
 					HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,0);
+					b =  0;
 					HAL_Delay(200);
+					
 				}
 			}
-		if( (UART_Buffer[0] == '@') &&(UART_Buffer[1] == 'V') && (UART_Buffer[2] == '2')&& (UART_Buffer[3] == 'B')&& (UART_Buffer[5] == 'S'))
+		if( (UART_Buffer[0] == '@') &&(UART_Buffer[5] == 'L') && (UART_Buffer[6] == '2')&& (UART_Buffer[7] == 'K'))
 			{
-				if(UART_Buffer[4]== 'X')
+				if(UART_Buffer[8]== 'X')
 				{
 					HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,1);
+					a = 1;
 					HAL_Delay(200);
+					
 				}
-				if(UART_Buffer[4]== 'Y')
+				if(UART_Buffer[8]== 'Y')
 				{
 					HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,0);
+					a = 0;
 					HAL_Delay(200);
+					
 				}
 			}
-	  if( (UART_Buffer[0] == '@') &&(UART_Buffer[1] == 'V') && (UART_Buffer[2] == '3')&& (UART_Buffer[3] == 'B')&& (UART_Buffer[5] == 'S'))
+	  if( (UART_Buffer[0] == '@') &&(UART_Buffer[9] == 'L') && (UART_Buffer[10] == '3')&& (UART_Buffer[11] == 'K'))
 			{
-				if(UART_Buffer[4]== 'X')
+				if(UART_Buffer[12]== 'X')
 				{
 					HAL_GPIO_WritePin(GPIOD,GPIO_PIN_13,1);
+					c = 1;
 					HAL_Delay(200);
+					
 				}
-				if(UART_Buffer[4]== 'Y')
+				if(UART_Buffer[12]== 'Y')
 				{
 					HAL_GPIO_WritePin(GPIOD,GPIO_PIN_13,0);
+					c = 0;
 					HAL_Delay(200);
+					
 				}
 			}
 }			
@@ -244,6 +275,44 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 }
 /** System Clock Configuration
 */
+void save(void)
+{
+	if(UART_Buffer[1] == 'S')
+	{
+		seri[0] = '@';
+		seri[1] = 'S';
+		seri[2] = UART_Buffer[2];
+		seri[3] = UART_Buffer[3];
+		if(seri[3] == '1')
+		{
+			readseri = '1';
+			id = 1;
+		}
+		else{
+			readseri = '0';
+			id = 1;
+		}
+	}
+}
+
+void Write_Flash(uint32_t add, uint8_t data)
+{
+     HAL_FLASH_Unlock();
+     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGSERR );
+     FLASH_Erase_Sector(FLASH_SECTOR_11, VOLTAGE_RANGE_3);
+     HAL_FLASH_Program(TYPEPROGRAM_WORD, FlashAddress, data);
+     HAL_FLASH_Lock();
+}
+
+uint32_t Read_Flash( uint32_t adress)
+{
+	uint32_t data_flash;
+	data_flash = *(uint32_t*)adress;
+	
+return data_flash;
+
+}
+
 void SystemClock_Config(void)
 {
 

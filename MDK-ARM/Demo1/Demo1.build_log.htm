@@ -22,48 +22,48 @@ Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
 E:\Bai_Tap\ARM\Demo1\MDK-ARM\Demo1.uvprojx
-Project File Date:  04/27/2018
+Project File Date:  05/20/2018
 
 <h2>Output:</h2>
 Build target 'Demo1'
 compiling main.c...
-../Src/main.c(102): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-                                        HAL_UART_Transmit_IT(&huart3, data1, 10 );
-../Src/main.c(115): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-                                        HAL_UART_Transmit_IT(&huart3, data2, 10 );
-../Src/main.c(128): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-                                        HAL_UART_Transmit_IT(&huart3, data3, 10 );
-../Src/main.c(141): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-                                        HAL_UART_Transmit_IT(&huart3, data4, 10 );
-../Src/main.c(154): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-                                        HAL_UART_Transmit_IT(&huart3, data5, 10 );
-../Src/main.c(167): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-                                        HAL_UART_Transmit_IT(&huart3, data6, 10 );
-../Src/main.c(176): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
+../Src/main.c(121): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data1, 6 );
+../Src/main.c(134): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data2, 6 );
+../Src/main.c(147): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data3, 6);
+../Src/main.c(160): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data4, 6 );
+../Src/main.c(173): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data5, 6 );
+../Src/main.c(186): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+                                        HAL_UART_Transmit_IT(&huart3, data6, 6);
+../Src/main.c(195): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
          HAL_I2C_Master_Transmit(&hi2c1, BH1750_I2CADDR , datalux, 2, 100);
-../Src/main.c(178): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
+../Src/main.c(197): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
          HAL_I2C_Master_Transmit(&hi2c1, BH1750_I2CADDR , datalux, 1, 100);
-../Src/main.c(180): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
+../Src/main.c(199): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "uint8_t *"
          HAL_I2C_Master_Receive(&hi2c1, BH1750_I2CADDR , datalux, 2, 100);
-../Src/main.c(183): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+../Src/main.c(202): warning:  #1035-D: single-precision operand implicitly converted to double-precision
       flevel = (float)lux/1.2; // convert to real lux
-../Src/main.c(184): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+../Src/main.c(203): warning:  #1035-D: single-precision operand implicitly converted to double-precision
       level = (float)lux/1.2; // convert to real lux
-../Src/main.c(193): warning:  #188-D: enumerated type mixed with another type
+../Src/main.c(212): warning:  #188-D: enumerated type mixed with another type
                                         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,1);
-../Src/main.c(198): warning:  #188-D: enumerated type mixed with another type
-                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,0);
-../Src/main.c(206): warning:  #188-D: enumerated type mixed with another type
-                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,1);
-../Src/main.c(211): warning:  #188-D: enumerated type mixed with another type
-                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,0);
 ../Src/main.c(219): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,0);
+../Src/main.c(229): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,1);
+../Src/main.c(236): warning:  #188-D: enumerated type mixed with another type
+                                        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,0);
+../Src/main.c(246): warning:  #188-D: enumerated type mixed with another type
                                         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_13,1);
-../Src/main.c(224): warning:  #188-D: enumerated type mixed with another type
+../Src/main.c(253): warning:  #188-D: enumerated type mixed with another type
                                         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_13,0);
 ../Src/main.c: 17 warnings, 0 errors
 linking...
-Program Size: Code=9256 RO-data=520 RW-data=52 ZI-data=1276  
+Program Size: Code=12060 RO-data=496 RW-data=64 ZI-data=1312  
 "Demo1\Demo1.axf" - 0 Error(s), 17 Warning(s).
 
 <h2>Software Packages used:</h2>
